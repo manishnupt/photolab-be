@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="1" author="dev">
+        <createTable tableName="photographer">
+            <column name="id" type="UUID" defaultValueComputed="gen_random_uuid()">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="agency_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="google_sub" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="dev">
+        <addForeignKeyConstraint
+            baseTableName="photographer"
+            baseColumnNames="agency_id"
+            constraintName="fk_photographer_agency"
+            referencedTableName="agency"
+            referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="3" author="dev">
+        <createIndex indexName="idx_photographer_agency_id" tableName="photographer">
+            <column name="agency_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="4" author="dev">
+        <addUniqueConstraint
+            tableName="photographer"
+            columnNames="email"
+            constraintName="uq_photographer_email"/>
+        <addUniqueConstraint
+            tableName="photographer"
+            columnNames="google_sub"
+            constraintName="uq_photographer_google_sub"/>
+    </changeSet>
+
+</databaseChangeLog>

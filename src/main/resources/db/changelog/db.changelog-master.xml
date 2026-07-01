@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <include file="db/changelog/changes/V1__create_agencies.xml"/>
+    <include file="db/changelog/changes/V2__create_photographers.xml"/>
+    <include file="db/changelog/changes/V3__create_events.xml"/>
+    <include file="db/changelog/changes/V4__create_photos.xml"/>
+    <include file="db/changelog/changes/V5__create_face_tags.xml"/>
+    <include file="db/changelog/changes/V6__create_photo_face_tags.xml"/>
+    <include file="db/changelog/changes/V7__create_selfie_searches.xml"/>
+    <include file="db/changelog/changes/V8__create_subscriptions.xml"/>
+    <include file="db/changelog/changes/V9__add_thumb_ready_to_photos.xml"/>
+    <include file="db/changelog/changes/V10__make_selfie_s3key_nullable.xml"/>
+
+</databaseChangeLog>

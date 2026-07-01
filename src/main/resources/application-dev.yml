@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:photowah}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:}
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:dev@example.com}
+    password: ${MAIL_PASSWORD:unused}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiry-ms: ${JWT_EXPIRY_MS:86400000}
+  aws:
+    access-key: ${AWS_ACCESS_KEY}
+    secret-key: ${AWS_SECRET_KEY}
+    region: ${AWS_REGION:ap-south-1}
+    bucket: ${AWS_BUCKET:photowah-dev-test}
+
+python:
+  service:
+    url: ${PYTHON_SERVICE_URL:http://localhost:8000}
+
+cors:
+  allowed-origins: "http://localhost:*"

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="1" author="dev">
+        <createTable tableName="photo_face_tag">
+            <column name="photo_id" type="UUID">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="face_tag_id" type="UUID">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="similarity_score" type="DOUBLE PRECISION">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="dev">
+        <addForeignKeyConstraint
+            baseTableName="photo_face_tag"
+            baseColumnNames="photo_id"
+            constraintName="fk_photo_face_tag_photo"
+            referencedTableName="photo"
+            referencedColumnNames="id"/>
+        <addForeignKeyConstraint
+            baseTableName="photo_face_tag"
+            baseColumnNames="face_tag_id"
+            constraintName="fk_photo_face_tag_face_tag"
+            referencedTableName="face_tag"
+            referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="3" author="dev">
+        <createIndex indexName="idx_photo_face_tag_photo_id" tableName="photo_face_tag">
+            <column name="photo_id"/>
+        </createIndex>
+        <createIndex indexName="idx_photo_face_tag_face_tag_id" tableName="photo_face_tag">
+            <column name="face_tag_id"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

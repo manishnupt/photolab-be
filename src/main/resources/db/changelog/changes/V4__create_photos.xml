@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="1" author="dev">
+        <createTable tableName="photo">
+            <column name="id" type="UUID" defaultValueComputed="gen_random_uuid()">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="event_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="s3_key_original" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="s3_key_thumb" type="VARCHAR(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="file_size_kb" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="recognition_status" type="VARCHAR(20)" defaultValue="PENDING">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uploaded_at" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="dev">
+        <addForeignKeyConstraint
+            baseTableName="photo"
+            baseColumnNames="event_id"
+            constraintName="fk_photo_event"
+            referencedTableName="events"
+            referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="3" author="dev">
+        <createIndex indexName="idx_photo_event_id" tableName="photo">
+            <column name="event_id"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
