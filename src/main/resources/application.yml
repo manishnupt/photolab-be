@@ -55,7 +55,7 @@ python:
     url: ${PYTHON_SERVICE_URL:http://localhost:8000}
 
 cors:
-  allowed-origins: http://localhost:5173
+  allowed-origins: http://localhost:5173,https://photolabs-fe.vercel.app
 
 management:
   endpoints:
